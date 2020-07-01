@@ -2,7 +2,7 @@
 // 不要使用额外的数组空间，你必须在 原地 修改输入数组 并在使用 O(1) 额外空间的条件下完成。
 // 示例 1:
 
-// 给定数组 nums = [1,1,2], 
+// 给定数组 nums = [1,2,2,2,3], 
 
 // 函数应该返回新的长度 2, 并且原数组 nums 的前两个元素被修改为 1, 2。 
 
@@ -21,14 +21,14 @@
  */
 var removeDuplicates = function (nums) {
     let count = 0;
-    for (let i = 1; i < nums.length; i++) {
-        if (nums[i] === nums[i - 1]) {
-            count++;
+    const lenth = nums.length;
+    for (let i = 1; i < lenth; i++) {
+        if (nums[i - 1] !== nums[i]) {
+            nums[i - count] = nums[i]
         } else {
-            nums[i - count] = nums[i];
+            count++;
         }
-        console.log('nums', nums);
     }
-    return nums.length-count;
+    return lenth-count;
 };
-console.log('result', removeDuplicates([1, 1, 1]))
+console.log('result', removeDuplicates([1, 1, 2,4,6,7,7,7,8]))
