@@ -31,21 +31,15 @@
  */
 var convert = function (s, numRows) {
     if (numRows === 1) return s;
-    let newStr = '';
-    let temp = 1;
-    while (temp < numRows) {
-        const arr = [];
-        arr.push(s[temp - 1]);
-        const numIndex = temp - 1 === 0 ? 2 * (numRows - 1) : 2 * (temp - 1);
-        let index = numIndex;
-        while (s.length >= index) {
-            arr.push(s[index]);
-            index += numIndex;
-        }
-        newStr += arr.join('');
-        temp++;
+    let list = new Array(numRows).fill("");
+    const n = 2 * (numRows - 1);
+    for (let i = 0; i < s.length; i++) {
+        let x = i % n;
+        list[x < numRows ? x : n - x] +=s[i];
     }
-    return newStr;
+    return list.join('');
 };
 
-console.log('result', convert('LEETCODEISHIRING', 3));
+// 思路：
+// 先生成一个行数长度的数组，然后根据循环周期 2(n-1)，以及余数来计算数组哪一项填充值
+console.log('result', convert('LEETCODEISHIRING', 4));
