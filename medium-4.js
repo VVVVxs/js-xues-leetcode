@@ -46,6 +46,29 @@
  * @param {string} str
  * @return {number}
  */
-var myAtoi = function(str) {
-
+var myAtoi = function (str) {
+    const noTrimStr = str.trim();
+    const limit = Math.pow(2, 31);
+    const max = limit - 1;
+    const min = -limit;
+    let result = 0;
+    if (noTrimStr.length > 0) {
+        const lastIndex = noTrimStr.indexOf(' ');
+        const firstIndex = str.indexOf(noTrimStr[0]);
+        if (firstIndex > -1) {
+            const newStr = str.substring(firstIndex, lastIndex > -1 ? lastIndex + firstIndex : str.length);
+            result = parseInt(newStr);
+            if (result > max) {
+                result = max;
+            }
+            if (result < min) {
+                result = min
+            }
+            if (isNaN(result)) {
+                result = 0
+            }
+        }
+    }
+    return result;
 };
+console.log('12345', myAtoi("    -88827   5655  U"));
