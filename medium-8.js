@@ -53,4 +53,4 @@ var threeSumClosest = function (nums, target) {
     return result;
 };
 
-console.log('result', threeSumClosest([1, 1, 1, 0], 100))
+console.log('result', threeSumClosest([3,4534,1231,23,22],100))

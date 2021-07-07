@@ -23,15 +23,22 @@ var letterCombinations = function (digits) {
         '8': ['t', 'u', 'v'],
         '9': ['w', 'x', 'y', 'z'],
     }
-    let str = '';
     const result = [];
-    const letterArr = [];
-    for (let i = 0; i < digits.length; i++) {
-        letterArr.push(map[digits[i]])
-    }
-    for (let i = 0; i < letterArr.length; i++) {
-        for (let j = 0; j < result[i].length; j++) {
-            result.push(result[i][j]);
+    if (digits.length === 0) return [];
+
+    const dfs = (curStr, i) => {
+        if (i > digits.length - 1) {
+            result.push(curStr);
+            return;
+        }
+
+        const letters = map[digits[i]];
+        for (const letter of letters) {
+            dfs(curStr + letter, i + 1);
         }
     }
+    dfs('', 0)
+    return result;
 };
+
+console.log('1231', letterCombinations('234'))
