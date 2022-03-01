@@ -30,43 +30,78 @@
  * @param {string} s
  * @return {boolean}
  */
-var isValid = function (s) {
-    const len = s.length;
-    if (len === 0) {
+// var isValid = function (s) {
+//     const len = s.length;
+//     if (len === 0) {
+//         return true;
+//     }
+//     // 如果字符串长度不是偶数，那么肯定是不符合条件的
+//     if (len % 2 !== 0) {
+//         return false;
+//     }
+//     const arr = [];
+//     for (let i = 0; i < len; i++) {
+//         const str = s[i];
+//         switch (str) {
+//             case '(':
+//                 arr.push(str);
+//                 break;
+//             case '[':
+//                 arr.push(str);
+//                 break;
+//             case '{':
+//                 arr.push(str);
+//                 break;
+//             case ')':
+//                 if (arr.pop() !== '(') return false;
+//                 break;
+//             case ']':
+//                 if (arr.pop() !== '[') return false;
+//                 break;
+//             case '}':
+//                 if (arr.pop() !== '{') return false;
+//                 break;
+//             default:
+//                 break;
+//         }
+//     }
+//     return !arr.length;
+// };
+
+// const isValid = (s) => {
+//     while (true) {
+//         let len = s.length;
+
+//         s = s.replace('{}', '').replace('[]', '').replace('()', '');
+
+//         if (s.length === len) {
+//             return len === 0;
+//         }
+//     }
+// }
+
+const isValid = (s) => {
+    if (!s) {
         return true;
     }
-    // 如果字符串长度不是偶数，那么肯定是不符合条件的
-    if (len % 2 !== 0) {
-        return false;
-    }
-    const arr = [];
-    for (let i = 0; i < len; i++) {
-        const str = s[i];
-        switch (str) {
-            case '(':
-                arr.push(str);
-                break;
-            case '[':
-                arr.push(str);
-                break;
-            case '{':
-                arr.push(str);
-                break;
-            case ')':
-                if (arr.pop() !== '(') return false;
-                break;
-            case ']':
-                if (arr.pop() !== '[') return false;
-                break;
-            case '}':
-                if (arr.pop() !== '{') return false;
-                break;
-            default:
-                break;
+    const leftToRight = {
+        '(': ')',
+        '{': '}',
+        '[': ']'
+    };
+    const stack = [];
+
+    for (let i = 0; i < s.length; i++) {
+        if (leftToRight[s[i]]) {
+            stack.push(s[i])
+        } else if (!stack.length || leftToRight[stack.pop()] !== s[i]) {
+            return false;
         }
     }
-    return !arr.length;
-};
+
+    return !stack.length;
+
+}
 
 // 耗时长
 // var isValid = function (s) {
@@ -102,4 +137,4 @@ var isValid = function (s) {
 //     return true;
 // };
 
-console.log('result', isValid("(]"));
+console.log('result', isValid("[()]"));
